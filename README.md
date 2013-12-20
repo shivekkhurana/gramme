@@ -1,7 +1,7 @@
 gramme
 ======
 
-A elegant way to pass volatile data around over [UDP (datagrammes)][]
+A elegant way to pass data around over [UDP (datagrammes)][]
 serialized with [msgpack][]
 
 Server
