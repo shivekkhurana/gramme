@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import socket
+import socket, msgpack
+
 try:
 	import socketserver
 except ImportError:
 	import SocketServer as socketserver
 
 from logbook import Logger
-import msgpack
 
-log = Logger('gramme', level='DEBUG')
+
+log = Logger('gramme', level=50)
 
 
 class GrammeHandler(socketserver.BaseRequestHandler):
@@ -17,7 +18,11 @@ class GrammeHandler(socketserver.BaseRequestHandler):
 
 	def handle(self):
 		raw, sock = self.request
-		unpacked = msgpack.unpackb(raw)
+		try:
+			unpacked = msgpack.unpackb(raw)
+		except Exception as e:
+			#if received data is not msgpack packed
+			unpacked = raw
 		log.info('Recieved message from: {0}'.format(str(sock)))
 		log.debug(dict(raw=raw, unpacked=unpacked, socket=sock))
 		return GrammeHandler._handler(unpacked)
@@ -41,7 +46,7 @@ def server(port=0, host=''):
 class GrammeClient(object):
 	""" Packs and sends data down a socket """
 
-	def __init__(self, port, host='', transport='udp', packaging='msgpack'):
+	def __init__(self, port, host='', transport='udp'):
 		self.host = host
 		self.port = int(port)
 		if transport in ('udp', 'datagram', 'dgram', 'datagramme'):
