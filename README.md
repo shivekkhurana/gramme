@@ -54,26 +54,7 @@ Todo
 ---
 License
 -------
-
-GNU AFFERO GENERAL PUBLIC LICENSE 
-
-Version 3, 19 November 2007
-
-**Required**
-- Disclose Source
-- License and copyright notice
-- State Changes
-
-**Permitted**
-- Commercial Use
-- Distribution
-- Modification
-- Private Use
-
-**Forbidden**
-
- - Hold Liable
- - Sublicensing
+MIT
 
 [UDP (datagrammes)]: https://en.wikipedia.org/wiki/User_Datagram_Protocol
 [msgpack]: http://msgpack.org/
